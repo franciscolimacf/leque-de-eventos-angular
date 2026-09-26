@@ -1,0 +1,106 @@
+/* Veio de styles/components.css. Aqui dentro, o escopo é deste componente. */
+:host {
+  display: contents; /* o <article> precisa ser o item do grid do <li> */
+}
+
+/* ================= card de evento ================= */
+.card-evento {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto 1fr; /* capa + corpo que ocupa o resto */
+  background: var(--cor-superficie);
+  border: var(--borda);
+  border-radius: var(--raio);
+  overflow: hidden;
+  transition:
+    border-color var(--transicao),
+    box-shadow var(--transicao),
+    transform var(--transicao);
+
+  &:hover {
+    border-color: var(--cor-marca);
+    box-shadow: var(--sombra);
+    transform: translateY(-2px);
+  }
+
+  /* o card inteiro vira alvo do clique, sem JS e sem link duplicado no leitor de tela */
+  & h3 a {
+    color: inherit;
+    text-decoration: none;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+    }
+  }
+  & h3 a:hover {
+    color: var(--cor-marca);
+  }
+
+  /* o outline do teclado precisa cercar o card, não o texto */
+  &:has(h3 a:focus-visible) {
+    outline: 2px solid var(--cor-marca);
+    outline-offset: 2px;
+  }
+  & h3 a:focus-visible {
+    outline: none;
+  }
+}
+
+.card-evento__capa {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: var(--cor-elevado);
+}
+
+.card-evento__corpo {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: var(--esp-1);
+  padding: var(--esp-2) var(--esp-3) var(--esp-3);
+}
+
+/* dentro do card a medida de leitura não vale: quem manda é a coluna */
+.card-evento__corpo p {
+  max-width: none;
+}
+
+.card-evento__meta {
+  color: var(--cor-texto-2);
+  font-size: 0.9rem;
+}
+
+.selo-gratuito {
+  /* empurra o selo pro rodapé do card: todos alinham na mesma linha */
+  margin-block-start: auto;
+  padding: 0.15rem 0.7rem;
+  border: 1px solid var(--cor-ok);
+  border-radius: var(--raio-pill);
+  background: var(--cor-ok-fundo);
+  color: var(--cor-ok);
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.card-evento:has(.selo-gratuito) {
+  border-color: color-mix(in srgb, var(--cor-ok) 45%, transparent);
+}
+
+/* card largo o bastante → capa vira coluna lateral */
+@container card (min-width: 30rem) {
+  .card-evento {
+    grid-template-columns: minmax(9rem, 34%) 1fr;
+    grid-template-rows: 1fr;
+  }
+  .card-evento__capa {
+    height: 100%;
+    aspect-ratio: auto;
+  }
+  .card-evento__corpo {
+    padding: var(--esp-3);
+  }
+}

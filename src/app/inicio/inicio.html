@@ -2,5 +2,12 @@
 
 <section aria-labelledby="tit-proximos">
   <h2 id="tit-proximos">Próximos eventos</h2>
-  <p>Os cards chegam na aula 04 — com dados, não com HTML copiado oito vezes.</p>
+  <app-lista-eventos [eventos]="destaques" />
 </section>
+
+<!-- o catálogo vira um arquivo JS separado, baixado só quando aparece na tela -->
+@defer (on viewport) {
+  <app-catalogo />
+} @placeholder {
+  <p>Carregando o catálogo completo…</p>
+}
