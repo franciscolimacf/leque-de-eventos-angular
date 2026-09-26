@@ -30,7 +30,7 @@
   }
 
   /* o "logo" é texto: cor do texto, não cor de link */
-  .cabecalho a[href='index.html'] {
+  .cabecalho a[href='/'] {
     color: var(--cor-texto);
     font-size: 1.05rem;
   }

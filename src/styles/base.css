@@ -33,11 +33,6 @@
     font-family: system-ui, sans-serif;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
-
-    /* rodapé sempre embaixo, sem position nem cálculo de altura */
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-    min-height: 100dvh; /* dvh, não vh: a barra do celular conta */
   }
 
   /* tipografia fluida: nunca menor que 1.75rem, nunca maior que 3rem */
